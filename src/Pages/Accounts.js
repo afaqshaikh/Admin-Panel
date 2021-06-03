@@ -12,28 +12,37 @@ function Accounts(props) {
     var accounts = props.accounts
     // console.log("redux data ==>", props)
 
-    var [name, setName] = useState("")
-    var [address, setAddress] = useState("")
-    var [city, setCity] = useState("")
-    var [addInfo, setAddInfo] = useState("")
+    var [name, setName] = useState()
+    var [address, setAddress] = useState()
+    var [city, setCity] = useState()
+    var [addInfo, setAddInfo] = useState()
     var [contact, setContact] = useState()
-    var [country, setCountry] = useState("")
-    var [companyName, setcompanyName] = useState("")
+    var [country, setCountry] = useState()
+    var [companyName, setcompanyName] = useState()
+
+    
 
     const handle_submit = (e) => {
         e.preventDefault()
-        var newAccount = {
-            name: name,
-            address: address,
-            city: city,
-            addInfo: addInfo,
-            contact: contact,
-            country: country,
-            companyName: companyName
-        }
-        console.log(newAccount)
-        set_account([newAccount])
+        setName("")
+        setAddress("")
+        setCity("")
+        setAddInfo("")
+        setContact("")
+        setCountry("")
+        setcompanyName("")
+        // set_account(name,contact)
 
+
+    }
+    var newAccount = {
+        name : name,
+        address : address,
+        city:city,
+        addInfo : addInfo,
+        contact : contact,
+        country : country,
+        companyName :companyName
     }
 
     return (
@@ -52,6 +61,7 @@ function Accounts(props) {
                                             <h4 className="card-title">Create Account</h4>
                                         </div>
                                         <div className="card-body">
+                                            {/* <button onClick={()=>props.set_account()}>Redux</button> */}
                                             <form onSubmit={handle_submit}>
 
                                                 <div className="row">
@@ -102,12 +112,12 @@ function Accounts(props) {
                                                             <label>Additional  Info</label>
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating"> Extra Information</label>
-                                                                <textarea className="form-control" value={addInfo} onChange={(e) => setAddInfo(e.target.value)} rows={5} defaultValue={""} />
+                                                                <textarea className="form-control"  onChange={(e) => setAddInfo(e.target.value)} rows={5} defaultValue={addInfo} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" className="btn btn-primary pull-right">Create Account</button>
+                                                <button type="submit" onClick={()=>props.set_account(newAccount)} className="btn btn-primary pull-right">Create Account</button>
                                                 <div className="clearfix" />
                                             </form>
                                         </div>
@@ -180,10 +190,16 @@ const mapStateToProps = (state) => {
         accounts: state.accounts
     })
 }
-const mapDispatchToProps = (dispatch) => {
-    return{
-        set_account: (data) => dispatch(set_account())
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    set_account: (newAccount)  => dispatch(set_account(newAccount))    
+  });
+//   const mapDispatchToProps = (dispatch) => ({
+//     set_account: (name,contact)  => dispatch(set_account(name,contact))    
+//   });
+// const mapDispatchToProps = (dispatch) => ({
+//     // return ({
+//         set_account: (name,contact) => dispatch(set_account(name,contact))
+//     // })
+// })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accounts)

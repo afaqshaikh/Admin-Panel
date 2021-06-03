@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
         case "SETACCOUNT":
             return ({
                 ...state,
-                accounts: action.payload
+                accounts: [...state.accounts,action.payload]
             })
         default:
             return state;
