@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {BrowserRouter as Router,Link } from "react-router-dom";
-import "./style.css"
+
 function SideBar() {
 
     let pathname = window.location.pathname;

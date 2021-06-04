@@ -19,8 +19,8 @@ function Accounts(props) {
     var [contact, setContact] = useState()
     var [country, setCountry] = useState()
     var [companyName, setcompanyName] = useState()
+    var [searchValue,setSearchValue] = useState('')
 
-    
 
     const handle_submit = (e) => {
         e.preventDefault()
@@ -31,19 +31,23 @@ function Accounts(props) {
         setContact("")
         setCountry("")
         setcompanyName("")
-        // set_account(name,contact)
-
-
     }
+
     var newAccount = {
-        name : name,
-        address : address,
-        city:city,
-        addInfo : addInfo,
-        contact : contact,
-        country : country,
-        companyName :companyName
+        name: name,
+        address: address,
+        city: city,
+        addInfo: addInfo,
+        contact: contact,
+        country: country,
+        companyName: companyName
     }
+    
+
+    const accountsFilter = accounts.filter((v) => {
+        return v.name.toLowerCase().includes(searchValue.toLowerCase())
+    })
+
 
     return (
         <div>
@@ -68,13 +72,13 @@ function Accounts(props) {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Name</label>
-                                                            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control" required />
+                                                            <input type="text"  onChange={(e) => setName(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Company Name</label>
-                                                            <input type="text" value={companyName} onChange={(e) => setcompanyName(e.target.value)} className="form-control" />
+                                                            <input type="text" onChange={(e) => setcompanyName(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,27 +86,28 @@ function Accounts(props) {
                                                     <div className="col-md-12">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Address</label>
-                                                            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" />
+                                                            <input type="text"  onChange={(e) => setAddress(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-4">
+                                                
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">City</label>
-                                                            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className="form-control" />
+                                                            <input type="text"  onChange={(e) => setCity(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Country</label>
-                                                            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} className="form-control" />
+                                                            <input type="text"  onChange={(e) => setCountry(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Number</label>
-                                                            <input type="number" value={contact} onChange={(e) => setContact(e.target.value)} className="form-control" required />
+                                                            <input type="number"  onChange={(e) => setContact(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,12 +117,12 @@ function Accounts(props) {
                                                             <label>Additional  Info</label>
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating"> Extra Information</label>
-                                                                <textarea className="form-control"  onChange={(e) => setAddInfo(e.target.value)} rows={5} defaultValue={addInfo} />
+                                                                <textarea className="form-control" onChange={(e) => setAddInfo(e.target.value)} rows={5} defaultValue={addInfo} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" onClick={()=>props.set_account(newAccount)} className="btn btn-primary pull-right">Create Account</button>
+                                                <button type="submit" onClick={() => props.set_account(newAccount)} className="btn btn-primary pull-right">Create Account</button>
                                                 <div className="clearfix" />
                                             </form>
                                         </div>
@@ -146,27 +151,33 @@ function Accounts(props) {
                                     <div className="card-header card-header-primary">
                                         <h4 className="card-title ">Accounts</h4>
                                         <p className="card-category"> Customers Accounts</p>
+                                        <input className=" form-control mt-1" 
+                                        type="text" placeholder="Search" aria-label="Search"
+                                        onChange={ e => setSearchValue(e.target.value)}  />
+
                                     </div>
                                     <div className="card-body">
                                         <div className="table-responsive">
                                             <table className="table">
-                                                <thead style={{color:"#8e24aa",fontWeight:'bold'}} >
+                                                <thead style={{ color: "#8e24aa", fontWeight: 'bold' }} >
                                                     <tr>
-                                                        <th style={{fontWeight:'bold'}}>ID</th>
-                                                        <th style={{fontWeight:'bold'}}>Name</th>
-                                                        <th style={{fontWeight:'bold'}}>Country</th>
-                                                        <th style={{fontWeight:'bold'}}>City</th>
-                                                        <th style={{fontWeight:'bold'}}>Contact</th>
+                                                        <th style={{ fontWeight: 'bold' }}>ID</th>
+                                                        <th style={{ fontWeight: 'bold' }}>Name</th>
+                                                        <th style={{ fontWeight: 'bold' }}>Country</th>
+                                                        <th style={{ fontWeight: 'bold' }}>City</th>
+                                                        <th style={{ fontWeight: 'bold' }}>Contact</th>
+                                                        <th style={{ fontWeight: 'bold' }}>Details</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {accounts.map((v, i) => {
+                                                    {accountsFilter.map((v, i) => {
                                                         return <tr key={i}>
                                                             <td>{i}</td>
                                                             <td>{v.name}</td>
                                                             <td>{v.country}</td>
                                                             <td>{v.city}</td>
-                                                            <td style={{color:"#8e24aa",fontWeight:'bold'}}>{v.contact}</td>
+                                                            <td style={{ color: "#8e24aa" }}>{v.contact}</td>
+                                                            <td><button type="button" className="btn btn-primary">View Details</button></td>
                                                         </tr>
                                                     })}
 
@@ -191,15 +202,7 @@ const mapStateToProps = (state) => {
     })
 }
 const mapDispatchToProps = (dispatch) => ({
-    set_account: (newAccount)  => dispatch(set_account(newAccount))    
-  });
-//   const mapDispatchToProps = (dispatch) => ({
-//     set_account: (name,contact)  => dispatch(set_account(name,contact))    
-//   });
-// const mapDispatchToProps = (dispatch) => ({
-//     // return ({
-//         set_account: (name,contact) => dispatch(set_account(name,contact))
-//     // })
-// })
+    set_account: (newAccount) => dispatch(set_account(newAccount))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accounts)
