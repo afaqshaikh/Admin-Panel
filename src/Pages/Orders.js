@@ -11,7 +11,7 @@ function Orders() {
             <div className="wrapper ">
                 <SideBar />
                 <div className="main-panel">
-                    <Navbar />
+                    <Navbar name="Orders" />
                     <div className="content">
                         <h1>Orders</h1>
                     </div>

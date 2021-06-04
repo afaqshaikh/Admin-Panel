@@ -11,7 +11,7 @@ function Bills() {
             <div className="wrapper ">
                 <SideBar />
                 <div className="main-panel">
-                    <Navbar />
+                    <Navbar name="Bills" />
                     <div className="content">
                         <h1>Bills</h1>
                     </div>

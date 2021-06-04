@@ -1,8 +1,8 @@
 
 const set_account = (newAccount) => {
-    console.log("Setaccount==>",newAccount)
+    // console.log("Setaccount==>",newAccount)
     return (dispatch) => {
-        console.log("Working......")
+        // console.log("Working......")
         dispatch({type : 'SETACCOUNT',payload : newAccount })
     }
 }

@@ -9,7 +9,7 @@ function Dashboard() {
             <div className="wrapper ">
                 <SideBar/>
                 <div className="main-panel">
-                    <Navbar/>
+                    <Navbar name="Dashboard"/>
                     <div className="content">
                         <div className="container-fluid">
                             <div className="row">

@@ -51,7 +51,7 @@ function Accounts(props) {
             <div className="wrapper ">
                 <SideBar />
                 <div className="main-panel">
-                    <Navbar />
+                    <Navbar name="Create Accounts" />
                     <div className="content">
                         <div className="container-fluid">
                             <div className="row">
@@ -150,13 +150,13 @@ function Accounts(props) {
                                     <div className="card-body">
                                         <div className="table-responsive">
                                             <table className="table">
-                                                <thead className=" text-primary">
+                                                <thead style={{color:"#8e24aa",fontWeight:'bold'}} >
                                                     <tr>
-                                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Country</th>
-                                                        <th>City</th>
-                                                        <th>Contact</th>
+                                                        <th style={{fontWeight:'bold'}}>ID</th>
+                                                        <th style={{fontWeight:'bold'}}>Name</th>
+                                                        <th style={{fontWeight:'bold'}}>Country</th>
+                                                        <th style={{fontWeight:'bold'}}>City</th>
+                                                        <th style={{fontWeight:'bold'}}>Contact</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -166,7 +166,7 @@ function Accounts(props) {
                                                             <td>{v.name}</td>
                                                             <td>{v.country}</td>
                                                             <td>{v.city}</td>
-                                                            <td className="text-primary">{v.contact}</td>
+                                                            <td style={{color:"#8e24aa",fontWeight:'bold'}}>{v.contact}</td>
                                                         </tr>
                                                     })}
 
