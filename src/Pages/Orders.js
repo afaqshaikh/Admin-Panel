@@ -34,7 +34,6 @@ function Orders(props) {
 
     var date = new Date()
     // const orders = props.orders
-
     return (
         <div>
             <div className="wrapper ">
@@ -52,15 +51,18 @@ function Orders(props) {
                                         <div className="card-body">
                                             {/* <button onClick={()=>props.set_account()}>Redux</button> */}
                                             <form>
-                                            <div className="row">
+                                                <div className="row">
                                                     <div className="col-md-6">
-                                                        <div className="form-group ">
-                                                            <label className="bmd-label-floating dropdown" >Select Account</label>
-                                                            <input type="text" className="form-control dropdown-toggle" 
-                                                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" 
-                                                            aria-expanded="false"
-                                                            onChange={(e)=>setName(e.target.value)}
-                                                            required />
+                                                        <div className="form-group dropdown">
+                                                            <label className="bmd-label-floating " >Select Account</label>
+                                                            <select className="form-control select2">
+                                                                <option>Select</option>
+                                                                <option>Car</option>
+                                                                <option>Bike</option>
+                                                                <option>Scooter</option>
+                                                                <option>Cycle</option>
+                                                                <option>Horse</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -76,24 +78,24 @@ function Orders(props) {
                                                             <label>Order Details</label>
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating"> Extra Information</label>
-                                                                <textarea className="form-control" rows={5} defaultValue="Nulkl" onChange={e=>setOrderDetail(e.target.value)}/>
+                                                                <textarea className="form-control" rows={5} defaultValue="Nulkl" onChange={e => setOrderDetail(e.target.value)} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    
+
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Weight</label>
-                                                            
-                                                            <input type="number" onChange={(e)=>setWeight(e.target.value)} className="form-control" required />
+
+                                                            <input type="number" onChange={(e) => setWeight(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Rate</label>
-                                                            <input type="number" onChange={(e)=>setRate(e.target.value)} className="form-control" />
+                                                            <input type="number" onChange={(e) => setRate(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,19 +104,19 @@ function Orders(props) {
 
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Total Payment</label>
-                                                            <input type="text" onChange={(e)=>setTotalP(e.target.value)} className="form-control" />
+                                                            <input type="text" onChange={(e) => setTotalP(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Advance</label>
-                                                            <input type="text" onChange={(e)=>setAdvance(e.target.value)} className="form-control" />
+                                                            <input type="text" onChange={(e) => setAdvance(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Remaining</label>
-                                                            <input type="number" onChange={(e)=>setRemainP(e.target.value)} className="form-control" required />
+                                                            <input type="number" onChange={(e) => setRemainP(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,12 +124,12 @@ function Orders(props) {
                                                     <div className="col-md-12">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Order Time</label>
-                                                            <input type="text" onChange={(e)=>setOrderT(e.target.value)} className="form-control" />
+                                                            <input type="text" onChange={(e) => setOrderT(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                
+
+
                                                 <button type="submit" className="btn btn-primary pull-right">Create Order</button>
                                                 <div className="clearfix" />
                                             </form>
@@ -217,4 +219,4 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps , null)(Orders)
+export default connect(mapStateToProps, null)(Orders)
