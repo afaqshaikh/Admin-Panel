@@ -104,7 +104,7 @@ function Orders(props) {
                                                                 <label>Order Details</label>
                                                                 <div className="form-group">
                                                                     <label className="bmd-label-floating"> Extra Information</label>
-                                                                    <textarea className="form-control" rows={5} defaultValue="" onChange={e => setOrderDetail(e.target.value)} />
+                                                                    <textarea className="form-control" rows={5} defaultValue={orderDetail ||""} onChange={e => setOrderDetail(e.target.value)} />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -115,13 +115,13 @@ function Orders(props) {
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Weight</label>
 
-                                                                <input type="number" onChange={(e) => setWeight(e.target.value)} className="form-control" required />
+                                                                <input type="number" value={weight || ""} onChange={(e) => setWeight(e.target.value)} className="form-control" required />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Rate</label>
-                                                                <input type="number" onChange={(e) => setRate(e.target.value)} className="form-control" />
+                                                                <input type="number" value={rate || ""} onChange={(e) => setRate(e.target.value)} className="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -130,19 +130,19 @@ function Orders(props) {
 
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Total Payment</label>
-                                                                <input type="number"  onChange={(e) => setTotalP(e.target.value)} className="form-control" />
+                                                                <input type="number" value={totalP || ""} onChange={(e) => setTotalP(e.target.value)} className="form-control" />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-4">
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Advance</label>
-                                                                <input type="number" onChange={(e) => setAdvance(e.target.value)} className="form-control" />
+                                                                <input type="number" value={advance || ""} onChange={(e) => setAdvance(e.target.value)} className="form-control" />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-4">
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Remaining</label>
-                                                                <input type="number" onChange={(e) => setRemainP(e.target.value)} className="form-control" required />
+                                                                <input type="number" value={remainP || ""} onChange={(e) => setRemainP(e.target.value)} className="form-control" required />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -150,7 +150,7 @@ function Orders(props) {
                                                         <div className="col-md-12">
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating">Order Time/Days</label>
-                                                                <input type="number" onChange={(e) => setOrderT(e.target.value)} className="form-control" />
+                                                                <input type="number" value={orderT || ""} onChange={(e) => setOrderT(e.target.value)} className="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>

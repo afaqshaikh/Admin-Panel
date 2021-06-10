@@ -72,13 +72,13 @@ function Accounts(props) {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Name</label>
-                                                            <input type="text"  onChange={(e) => setName(e.target.value)} className="form-control" required />
+                                                            <input type="text" value={name || ""}  onChange={(e) => setName(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Company Name</label>
-                                                            <input type="text" onChange={(e) => setcompanyName(e.target.value)} className="form-control" />
+                                                            <input type="text" value={companyName || ""} onChange={(e) => setcompanyName(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@ function Accounts(props) {
                                                     <div className="col-md-12">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Address</label>
-                                                            <input type="text"  onChange={(e) => setAddress(e.target.value)} className="form-control" />
+                                                            <input type="text" value={address || ""}  onChange={(e) => setAddress(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,19 +95,19 @@ function Accounts(props) {
                                                 
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">City</label>
-                                                            <input type="text"  onChange={(e) => setCity(e.target.value)} className="form-control" />
+                                                            <input type="text" value={city || ""}  onChange={(e) => setCity(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Country</label>
-                                                            <input type="text"  onChange={(e) => setCountry(e.target.value)} className="form-control" />
+                                                            <input type="text" value={country || ""}  onChange={(e) => setCountry(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Number</label>
-                                                            <input type="number"  onChange={(e) => setContact(e.target.value)} className="form-control" required />
+                                                            <input type="number" value={contact || ""}  onChange={(e) => setContact(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                 </div>
