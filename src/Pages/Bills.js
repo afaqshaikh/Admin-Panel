@@ -24,14 +24,14 @@ function Bills() {
                                         <div className="card-body">
                                             {/* <button onClick={()=>props.set_account()}>Redux</button> */}
                                             <form>
-                                            <div className="row">
+                                                <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group ">
                                                             <label className="bmd-label-floating dropdown" >Select Account</label>
-                                                            <input type="text" className="form-control dropdown-toggle" 
-                                                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" 
-                                                            aria-expanded="false"
-                                                            required />
+                                                            <input type="text" className="form-control dropdown-toggle"
+                                                                id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                                                aria-expanded="false"
+                                                                required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -47,24 +47,24 @@ function Bills() {
                                                             <label>Order Details</label>
                                                             <div className="form-group">
                                                                 <label className="bmd-label-floating"> Extra Information</label>
-                                                                <textarea className="form-control" rows={5} defaultValue="Nulkl"/>
+                                                                <textarea className="form-control" rows={5} defaultValue="Nulkl" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    
+
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Weight</label>
-                                                            
+
                                                             <input type="number" className="form-control" required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Rate</label>
-                                                            <input type="number"  className="form-control" />
+                                                            <input type="number" className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -73,7 +73,7 @@ function Bills() {
 
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Total Payment</label>
-                                                            <input type="text"  className="form-control" />
+                                                            <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
@@ -97,8 +97,8 @@ function Bills() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                
+
+
                                                 <button type="submit" className="btn btn-primary pull-right">Create Order</button>
                                                 <div className="clearfix" />
                                             </form>
