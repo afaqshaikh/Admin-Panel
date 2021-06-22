@@ -60,7 +60,6 @@ function Orders(props) {
     )
 
 
-
     var date = new Date()
     return (
         <div>
@@ -208,59 +207,59 @@ function Orders(props) {
                                                         return <tr key={i}>
                                                             <td>{i}</td>
                                                             <td>{v.name}</td>
-                                                            <td>{v.time}</td>
+                                                            <td>{v.orderT}</td>
                                                             <td>{v.advance}</td>
                                                             <td>{v.remainP}</td>
                                                             <td>
-                                                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
-                                                                <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <button type="button"  className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
+                                                                <div className="modal fade"  id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div className="modal-dialog" role="document">
                                                                         <div className="modal-content">
-                                                                            <div className="modal-header" style={{backgroundColor: "#8e24aa"}}>
-                                                                                <h5 className="modal-title" id="exampleModalLabel" style={{color: "#fff"}}>Order Details</h5>
+                                                                            <div className="modal-header" style={{ backgroundColor: "#8e24aa" }}>
+                                                                                <h5 className="modal-title" id="exampleModalLabel" style={{ color: "#fff" }}>Order Details</h5>
                                                                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true" style={{color: "#fff"}}>×</span>
+                                                                                    <span aria-hidden="true" style={{ color: "#fff" }}>×</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div className="modal-body">
                                                                                 <div className="row">
                                                                                     <div className="col-12">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Account Name</h6>
-                                                                                        <p>Afaque</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Account Name</h6>
+                                                                                        <p>{v.name}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-12">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Order Detail</h6>
-                                                                                        <p>Afaque</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Order Detail</h6>
+                                                                                        <p>{v.orderDetail}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Weight</h6>
-                                                                                        <p>123.54</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Weight</h6>
+                                                                                        <p>{v.weight}</p>
                                                                                     </div>
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Rate</h6>
-                                                                                        <p>250</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Rate</h6>
+                                                                                        <p>{v.rate}</p>
                                                                                     </div>
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Time/Days</h6>
-                                                                                        <p>15</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Time/Days</h6>
+                                                                                        <p>{v.orderT}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Total Payment</h6>
-                                                                                        <p>1000</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Total Payment</h6>
+                                                                                        <p>{v.totalP}</p>
                                                                                     </div>
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Advance</h6>
-                                                                                        <p>200</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Advance</h6>
+                                                                                        <p>{v.advance}</p>
                                                                                     </div>
                                                                                     <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Remaining</h6>
-                                                                                        <p>250</p>
+                                                                                        <h6 style={{ color: "#8e24aa" }}>Remaining</h6>
+                                                                                        <p>{v.remainP}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -274,7 +273,7 @@ function Orders(props) {
                                                             </td>
                                                         </tr>
                                                     })}
-                                                    <tr>
+                                                    {/* <tr>
                                                         <td>0</td>
                                                         <td>Afaque</td>
                                                         <td>Pakistan</td>
@@ -283,65 +282,65 @@ function Orders(props) {
                                                         <td>
                                                             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
                                                             <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div className="modal-dialog" role="document">
-                                                                        <div className="modal-content">
-                                                                            <div className="modal-header" style={{backgroundColor: "#8e24aa"}}>
-                                                                                <h5 className="modal-title" id="exampleModalLabel" style={{color: "#fff"}}>Order Details</h5>
-                                                                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true" style={{color: "#fff"}}>×</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div className="modal-body">
-                                                                                <div className="row">
-                                                                                    <div className="col-12">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Account Name</h6>
-                                                                                        <p>Afaque</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="row">
-                                                                                    <div className="col-12">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Order Detail</h6>
-                                                                                        <p>Afaque</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="row">
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Weight</h6>
-                                                                                        <p>123.54</p>
-                                                                                    </div>
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Rate</h6>
-                                                                                        <p>250</p>
-                                                                                    </div>
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Time/Days</h6>
-                                                                                        <p>15</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="row">
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Total Payment</h6>
-                                                                                        <p>1000</p>
-                                                                                    </div>
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Advance</h6>
-                                                                                        <p>200</p>
-                                                                                    </div>
-                                                                                    <div className="col-4">
-                                                                                        <h6 style={{color: "#8e24aa"}}>Remaining</h6>
-                                                                                        <p>250</p>
-                                                                                    </div>
+                                                                <div className="modal-dialog" role="document">
+                                                                    <div className="modal-content">
+                                                                        <div className="modal-header" style={{ backgroundColor: "#8e24aa" }}>
+                                                                            <h5 className="modal-title" id="exampleModalLabel" style={{ color: "#fff" }}>Order Details</h5>
+                                                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true" style={{ color: "#fff" }}>×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="modal-body">
+                                                                            <div className="row">
+                                                                                <div className="col-12">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Account Name</h6>
+                                                                                    <p>Afaque</p>
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="modal-footer">
-                                                                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                {/* <button type="button" className="btn btn-primary">Save changes</button> */}
+                                                                            <div className="row">
+                                                                                <div className="col-12">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Order Detail</h6>
+                                                                                    <p>Afaque</p>
+                                                                                </div>
                                                                             </div>
+                                                                            <div className="row">
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Weight</h6>
+                                                                                    <p>123.54</p>
+                                                                                </div>
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Rate</h6>
+                                                                                    <p>250</p>
+                                                                                </div>
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Time/Days</h6>
+                                                                                    <p>15</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="row">
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Total Payment</h6>
+                                                                                    <p>1000</p>
+                                                                                </div>
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Advance</h6>
+                                                                                    <p>200</p>
+                                                                                </div>
+                                                                                <div className="col-4">
+                                                                                    <h6 style={{ color: "#8e24aa" }}>Remaining</h6>
+                                                                                    <p>250</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="modal-footer">
+                                                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="button" className="btn btn-primary">Save changes</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </td>
-                                                    </tr>
+                                                    </tr> */}
 
                                                 </tbody>
                                             </table>

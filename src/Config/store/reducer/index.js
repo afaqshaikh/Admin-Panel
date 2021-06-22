@@ -5,7 +5,7 @@ const INITIAL_STATE = {
         { name: "Ahmer", company: "null", address: "etc", city: "hyderabad", addInfo: "etc..", country: "pakistan", contact: "03130016396" },
     ],
     orders: [
-        { name: "Afque", time: "15Days", weight: "10gram", rate: "250", totalP: 3000, advance: 500, remainP: 2500 ,orderDetail: "etc"}
+        { name: "Afque", orderT: "15Days", weight: "10gram", rate: "250", totalP: 3000, advance: 500, remainP: 2500 ,orderDetail: "etc"}
         // {name : accounts.name , time: "15Days",weight: "10gram" , rate : "250", totalP : 3000 , advance : 500 , remainP : orders.totalP - orders.advance},
         // {name : accounts.name , time: "15Days",weight: "10gram" , rate : "250", totalP : 3000 , advance : 500 , remainP : orders.totalP - orders.advance},
     ]
