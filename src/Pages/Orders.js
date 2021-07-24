@@ -26,6 +26,18 @@ function Orders(props) {
     var [remainP, setRemainP] = useState()
     var [orderT, setOrderT] = useState()
     var [currentName, setcurrentName] = useState()
+    var [currentOrderDetail ,setcurrentOrderDetail] = useState()
+    var [currentWeight, setcurrentWeight] = useState()
+    var [currentRate, setcurrentRate] = useState()
+    var [currentTotalP, setcurrentTotalP] = useState()
+    var [currentAdvance, setcurrentAdvance] = useState()
+    var [currentRemainP, setcurrentRemainP] = useState()
+    var [currentOrderT, setcurrentOrderT] = useState()
+    var [searchValue,setSearchValue] = useState('')
+
+    
+    totalP = weight*rate
+    remainP = totalP - advance
 
     const handle_submit = (e) => {
         // window.print()
@@ -61,18 +73,39 @@ function Orders(props) {
     }
     )
 
+    // Bootstrap Model Detail Function
     const currentDetails = (v, i) => {
-        // e.preventDefault()
-        console.log("current detail. ==>" , v,i)
-        // var name = v.name
-        // var accountDetails = [v]
+        // console.log("current detail. ==>" , v,i)
+        setcurrentName(v.name)
+        setcurrentOrderDetail(v.orderDetail)
+        setcurrentWeight(v.weight)
+        setcurrentRate(v.rate)
+        setcurrentTotalP(v.totalP)
+        setcurrentAdvance(v.advance)
+        setcurrentRemainP(v.remainP)
+        setcurrentOrderT(v.orderT)
 
-        // console.log(accountDetails)
-        // setcurrentName(name)
+    }
+
+    //Filter In Orders list
+    const orderFilter = orders.filter((v) => {
+        return v.name.toLowerCase().includes(searchValue.toLowerCase())
+    })
+
+    //Print function
+    let printDetails = ()=>{
+        var divContent = document.getElementById("exampleModal").innerHTML
+        // console.log(divContent)
+        var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body > <h1>Singapore Silver (Order Details) <br>')
+            a.document.write(divContent);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
     }
 
 
-    var date = new Date()
     return (
         <div>
             <div className="wrapper ">
@@ -198,6 +231,7 @@ function Orders(props) {
                                         <p className="card-category"> Customers Orders</p>
                                         <input className=" form-control mt-1"
                                             type="text" placeholder="Search" aria-label="Search"
+                                            onChange={ e => setSearchValue(e.target.value)}
                                         />
 
                                     </div>
@@ -215,7 +249,7 @@ function Orders(props) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {orders.map((v, i) => {
+                                                    {orderFilter.map((v, i) => {
                                                         return <tr key={i}>
                                                             <td>{i}</td>
                                                             <td>{v.name}</td>
@@ -223,83 +257,13 @@ function Orders(props) {
                                                             <td>{v.advance}</td>
                                                             <td>{v.remainP}</td>
                                                             <td>
-                                                                <button onClick={currentDetails.bind(v,i)} className="btn btn-primary" >View Details</button>
-                                                                {/* <button type="button" onClick={currentDetails(v, i)} className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button> */}
+                                                                {/* <button onClick={()=>{currentDetails(v,i)}} className="btn btn-primary" >View Details</button> */}
+                                                                <button type="button" onClick={()=>{currentDetails(v,i)}} className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
 
                                                             </td>
                                                         </tr>
 
                                                     })}
-
-                                                    {/* <tr>
-                                                        <td>0</td>
-                                                        <td>Afaque</td>
-                                                        <td>Pakistan</td>
-                                                        <td>Hyderabad</td>
-                                                        <td style={{ color: "#8e24aa" }}>03003066396</td>
-                                                        <td>
-                                                            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
-                                                            <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div className="modal-dialog" role="document">
-                                                                    <div className="modal-content">
-                                                                        <div className="modal-header" style={{ backgroundColor: "#8e24aa" }}>
-                                                                            <h5 className="modal-title" id="exampleModalLabel" style={{ color: "#fff" }}>Order Details</h5>
-                                                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true" style={{ color: "#fff" }}>×</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div className="modal-body">
-                                                                            <div className="row">
-                                                                                <div className="col-12">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Account Name</h6>
-                                                                                    <p>Afaque</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="row">
-                                                                                <div className="col-12">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Order Detail</h6>
-                                                                                    <p>Afaque</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="row">
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Weight</h6>
-                                                                                    <p>123.54</p>
-                                                                                </div>
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Rate</h6>
-                                                                                    <p>250</p>
-                                                                                </div>
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Time/Days</h6>
-                                                                                    <p>15</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="row">
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Total Payment</h6>
-                                                                                    <p>1000</p>
-                                                                                </div>
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Advance</h6>
-                                                                                    <p>200</p>
-                                                                                </div>
-                                                                                <div className="col-4">
-                                                                                    <h6 style={{ color: "#8e24aa" }}>Remaining</h6>
-                                                                                    <p>250</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="modal-footer">
-                                                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <button type="button" className="btn btn-primary">Save changes</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr> */}
-
                                                 </tbody>
                                             </table>
                                             <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -315,47 +279,47 @@ function Orders(props) {
                                                             <div className="row">
                                                                 <div className="col-12">
                                                                     <h6 style={{ color: "#8e24aa" }}>Account Name</h6>
-                                                                    <p>lkj</p>
+                                                                    <p>{currentName}</p>
                                                                 </div>
                                                             </div>
                                                             <div className="row">
                                                                 <div className="col-12">
                                                                     <h6 style={{ color: "#8e24aa" }}>Order Detail</h6>
-                                                                    <p>kl</p>
+                                                                    <p>{currentOrderDetail}</p>
                                                                 </div>
                                                             </div>
                                                             <div className="row">
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Weight</h6>
-                                                                    <p>lkj</p>
+                                                                    <p>{`${currentWeight} gram`}</p>
                                                                 </div>
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Rate</h6>
-                                                                    <p>kj;o</p>
+                                                                    <p>{`${currentRate} / gram`}</p>
                                                                 </div>
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Time/Days</h6>
-                                                                    <p>lkj</p>
+                                                                    <p>{currentOrderT}</p>
                                                                 </div>
                                                             </div>
                                                             <div className="row">
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Total Payment</h6>
-                                                                    <p>jlk</p>
+                                                                    <p>{currentTotalP}</p>
                                                                 </div>
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Advance</h6>
-                                                                    <p>oj</p>
+                                                                    <p>{currentAdvance}</p>
                                                                 </div>
                                                                 <div className="col-4">
                                                                     <h6 style={{ color: "#8e24aa" }}>Remaining</h6>
-                                                                    <p>oj</p>
+                                                                    <p>{currentRemainP}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" className="btn btn-primary">Save changes</button>
+                                                            <button type="button" onClick={()=>printDetails()} className="btn btn-primary">Print Receipt</button>
                                                         </div>
                                                     </div>
                                                 </div>

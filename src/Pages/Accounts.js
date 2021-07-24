@@ -19,7 +19,14 @@ function Accounts(props) {
     var [contact, setContact] = useState()
     var [country, setCountry] = useState()
     var [companyName, setcompanyName] = useState()
-    var [searchValue,setSearchValue] = useState('')
+    var [searchValue, setSearchValue] = useState('')
+    var [currentName , setCurrentName] = useState()
+    var [currentAddress , setCurrentAddress] = useState()
+    var [currentCity , setCurrentCity] = useState()
+    var [currentAddInfo , setCurrentAddInfo] = useState()
+    var [currentContact , setCurrentContact] = useState()
+    var [currentCountry , setCurrentCountry] = useState()
+    var [currentCompanyName , setCurrentCompanyName] = useState()
 
 
     const handle_submit = (e) => {
@@ -42,7 +49,16 @@ function Accounts(props) {
         country: country,
         companyName: companyName
     }
-    
+
+    let currentDetails = (v,i) => {
+        setCurrentName(v.name)
+        setCurrentAddress(v.address)
+        setCurrentCity(v.city)
+        setCurrentAddInfo(v.addInfo)
+        setCurrentContact(v.contact)        
+        setCurrentCountry(v.country)
+        setCurrentCompanyName(v.companyName)
+    }
 
     const accountsFilter = accounts.filter((v) => {
         return v.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -72,7 +88,7 @@ function Accounts(props) {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Name</label>
-                                                            <input type="text" value={name || ""}  onChange={(e) => setName(e.target.value)} className="form-control" required />
+                                                            <input type="text" value={name || ""} onChange={(e) => setName(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -86,28 +102,28 @@ function Accounts(props) {
                                                     <div className="col-md-12">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Address</label>
-                                                            <input type="text" value={address || ""}  onChange={(e) => setAddress(e.target.value)} className="form-control" />
+                                                            <input type="text" value={address || ""} onChange={(e) => setAddress(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-4">
-                                                
+
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">City</label>
-                                                            <input type="text" value={city || ""}  onChange={(e) => setCity(e.target.value)} className="form-control" />
+                                                            <input type="text" value={city || ""} onChange={(e) => setCity(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Country</label>
-                                                            <input type="text" value={country || ""}  onChange={(e) => setCountry(e.target.value)} className="form-control" />
+                                                            <input type="text" value={country || ""} onChange={(e) => setCountry(e.target.value)} className="form-control" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">Number</label>
-                                                            <input type="number" value={contact || ""}  onChange={(e) => setContact(e.target.value)} className="form-control" required />
+                                                            <input type="number" value={contact || ""} onChange={(e) => setContact(e.target.value)} className="form-control" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,9 +167,9 @@ function Accounts(props) {
                                     <div className="card-header card-header-primary">
                                         <h4 className="card-title ">Accounts</h4>
                                         <p className="card-category"> Customers Accounts</p>
-                                        <input className=" form-control mt-1" 
-                                        type="text" placeholder="Search" aria-label="Search"
-                                        onChange={ e => setSearchValue(e.target.value)}  />
+                                        <input className=" form-control mt-1"
+                                            type="text" placeholder="Search" aria-label="Search"
+                                            onChange={e => setSearchValue(e.target.value)} />
 
                                     </div>
                                     <div className="card-body">
@@ -177,12 +193,64 @@ function Accounts(props) {
                                                             <td>{v.country}</td>
                                                             <td>{v.city}</td>
                                                             <td style={{ color: "#8e24aa" }}>{v.contact}</td>
-                                                            <td><button type="button" className="btn btn-primary">View Details</button></td>
+                                                            <td>
+                                                            <button type="button" onClick={()=>{currentDetails(v,i)}} className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
+                                                            </td>
                                                         </tr>
                                                     })}
 
                                                 </tbody>
                                             </table>
+                                            <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal-dialog" role="document">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header" style={{ backgroundColor: "#8e24aa" }}>
+                                                            <h5 className="modal-title" id="exampleModalLabel" style={{ color: "#fff" }}>Order Details</h5>
+                                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true" style={{ color: "#fff" }}>×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                    <h6 style={{ color: "#8e24aa" }}>Account Name</h6>
+                                                                    <p>{currentName}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                    <h6 style={{ color: "#8e24aa" }}>Address</h6>
+                                                                    <p>{currentAddress}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+                                                                <div className="col-6">
+                                                                    <h6 style={{ color: "#8e24aa" }}>Company name</h6>
+                                                                    <p>{currentCompanyName}</p>
+                                                                </div>
+                                                                <div className="col-6">
+                                                                    <h6 style={{ color: "#8e24aa" }}>Country</h6>
+                                                                    <p>{currentCountry}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+                                                                <div className="col-6">
+                                                                    <h6 style={{ color: "#8e24aa" }}>City</h6>
+                                                                    <p>{currentCity}</p>
+                                                                </div>
+                                                                <div className="col-6">
+                                                                    <h6 style={{ color: "#8e24aa" }}>Contact</h6>
+                                                                    <p>{currentContact}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button"  className="btn btn-primary">Print Receipt</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
