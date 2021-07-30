@@ -16,6 +16,8 @@ function Orders(props) {
 
     const accounts = props.accounts
     const orders = props.orders
+    var date = new Date()
+
 
     var [name, setName] = useState()
     var [orderDetail, setOrderDetail] = useState()
@@ -26,17 +28,17 @@ function Orders(props) {
     var [remainP, setRemainP] = useState()
     var [orderT, setOrderT] = useState()
     var [currentName, setcurrentName] = useState()
-    var [currentOrderDetail ,setcurrentOrderDetail] = useState()
+    var [currentOrderDetail, setcurrentOrderDetail] = useState()
     var [currentWeight, setcurrentWeight] = useState()
     var [currentRate, setcurrentRate] = useState()
     var [currentTotalP, setcurrentTotalP] = useState()
     var [currentAdvance, setcurrentAdvance] = useState()
     var [currentRemainP, setcurrentRemainP] = useState()
     var [currentOrderT, setcurrentOrderT] = useState()
-    var [searchValue,setSearchValue] = useState('')
+    var [searchValue, setSearchValue] = useState('')
 
-    
-    totalP = weight*rate
+
+    totalP = weight * rate
     remainP = totalP - advance
 
     const handle_submit = (e) => {
@@ -93,24 +95,24 @@ function Orders(props) {
     })
 
     //Print function
-    let printDetails = ()=>{
+    let printDetails = () => {
         // var divContent = document.getElementById("exampleModal").innerHTML
         // console.log(divContent)
-        var a = window.open(document.URL,'_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        var a = window.open(document.URL, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
         // var a = window.open('', '', 'height=500, width=500');
-            a.document.write('<html>');
-            a.document.write('<body> <h1 style="text-align:center">Singapore Silver (Order Details)</h1>')
-            a.document.write("<table style='width:100%;border:1px solid black;padding:10px'>")
-            a.document.write(`<tr><td style='border:1px solid black'>Name<br/> ${currentName}</td></tr><br/>`)
-            a.document.write(`<tr><td style='border:1px solid black'>Order Details <br/>  ${currentOrderDetail}</td></tr><br/>`)
-            a.document.write(`<tr><td style='border:1px solid black'>Weight <br/>  ${currentWeight}</td><td style='border:1px solid black'>Rate <br/>  ${currentRate}</td></tr><br/>`)
-            a.document.write(`<tr><td style='border:1px solid black'>Total Price <br/>  ${currentTotalP}</td><td style='border:1px solid black'>Advance <br/>  ${currentAdvance}</td></tr><br/>`)
-            a.document.write(`<tr><td style='border:1px solid black'>Remaining <br/>  ${currentRemainP}</td><td style='border:1px solid black'>Time <br/>  ${currentOrderT}</td></tr>`)
+        a.document.write('<html>');
+        a.document.write('<body> <h1 style="text-align:center">Singapore Silver (Order Details)</h1>')
+        a.document.write("<table style='width:100%;border:1px solid black;padding:10px'>")
+        a.document.write(`<tr><td style='border:1px solid black'>Name<br/> ${currentName}</td><td style='border:1px solid black'>Date<br/> ${date.toDateString()}</td></tr><br/>`)
+        a.document.write(`<tr><td style='border:1px solid black'>Order Details <br/>  ${currentOrderDetail}</td></tr><br/>`)
+        a.document.write(`<tr><td style='border:1px solid black'>Weight <br/>  ${currentWeight}</td><td style='border:1px solid black'>Rate <br/>  ${currentRate}</td></tr><br/>`)
+        a.document.write(`<tr><td style='border:1px solid black'>Total Price <br/>  ${currentTotalP}</td><td style='border:1px solid black'>Advance <br/>  ${currentAdvance}</td></tr><br/>`)
+        a.document.write(`<tr><td style='border:1px solid black'>Remaining <br/>  ${currentRemainP}</td><td style='border:1px solid black'>Time <br/>  ${currentOrderT}</td></tr>`)
 
-            a.document.write("</table>")
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
+        a.document.write("</table>")
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
     }
 
 
@@ -239,7 +241,7 @@ function Orders(props) {
                                         <p className="card-category"> Customers Orders</p>
                                         <input className=" form-control mt-1"
                                             type="text" placeholder="Search" aria-label="Search"
-                                            onChange={ e => setSearchValue(e.target.value)}
+                                            onChange={e => setSearchValue(e.target.value)}
                                         />
 
                                     </div>
@@ -266,7 +268,7 @@ function Orders(props) {
                                                             <td>{v.remainP}</td>
                                                             <td>
                                                                 {/* <button onClick={()=>{currentDetails(v,i)}} className="btn btn-primary" >View Details</button> */}
-                                                                <button type="button" onClick={()=>{currentDetails(v,i)}} className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
+                                                                <button type="button" onClick={() => { currentDetails(v, i) }} className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Details</button>
 
                                                             </td>
                                                         </tr>
@@ -327,7 +329,7 @@ function Orders(props) {
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" onClick={()=>printDetails()} className="btn btn-primary">Print Receipt</button>
+                                                            <button type="button" onClick={() => printDetails()} className="btn btn-primary">Print Receipt</button>
                                                         </div>
                                                     </div>
                                                 </div>

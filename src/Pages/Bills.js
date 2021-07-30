@@ -2,11 +2,39 @@
 import Footer from '../Components/Footer'
 import SideBar from '../Components/SideBar'
 import Navbar from '../Components/Navbar'
+import { connect } from 'react-redux';
+import { useState } from 'react'
+import SelectSearch, { fuzzySearch } from 'react-select-search';
 
 
 
-function Bills() {
+
+function Bills(props) {
     var date = new Date()
+    const accounts = props.accounts
+
+    const [name, setName] = useState()
+    const [inputRows, setInputRows] = useState(1)
+    const [itemDesc , setItemDesc] = useState()
+    const [weight , setWeight] = useState()
+    const [rate , setRate] = useState()
+    const [amount , setAmount] = useState()
+
+    console.log(itemDesc)
+    // const billDetails = {
+    //     account : name,
+    // }
+
+    // Get accounts from redux
+    const options = accounts.map((v, i) => {
+        return {
+            name: v.name,
+            value: v.name
+        }
+    }
+    )
+
+
     return (
         <div>
             <div className="wrapper ">
@@ -22,16 +50,17 @@ function Bills() {
                                             <h4 className="card-title">Create Bills</h4>
                                         </div>
                                         <div className="card-body">
-                                            {/* <button onClick={()=>props.set_account()}>Redux</button> */}
                                             <form>
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group ">
-                                                            <label className="bmd-label-floating dropdown" >Select Account</label>
-                                                            <input type="text" className="form-control dropdown-toggle"
-                                                                id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false"
-                                                                required />
+                                                            <SelectSearch options={options}
+                                                                search filterOptions={fuzzySearch}
+                                                                placeholder="Select Account"
+                                                                emptyMessage="Not found"
+                                                                value={options.value}
+                                                                onChange={(e) => setName(e)}
+                                                            />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -41,85 +70,48 @@ function Bills() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label>Order Details</label>
-                                                            <div className="form-group">
-                                                                <label className="bmd-label-floating"> Extra Information</label>
-                                                                <textarea className="form-control" rows={5} defaultValue="Nulkl" />
+                                                {[...Array(inputRows)].map((elementInArray, index) => {
+                                                    return (
+                                                        <div className="row" key={index}>
+
+                                                            <div className="col-md-3">
+                                                                <div className="form-group">
+                                                                    <label className="bmd-label-floating">Item Desc.</label>
+
+                                                                    <input type="text" value={itemDesc||""} onChange={e=>setItemDesc(e.target.value)} className="form-control" required />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+                                                                <div className="form-group">
+                                                                    <label className="bmd-label-floating">Weight</label>
+                                                                    <input type="number" value={weight||""} onChange={e=>setWeight(e.target.value)} className="form-control" />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+
+                                                                <div className="form-group">
+                                                                    <label className="bmd-label-floating">Rate </label>
+                                                                    <input type="number" value={rate||""} onChange={e=>setRate(e.target.value)} className="form-control" />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+
+                                                                <div className="form-group">
+                                                                    <label className="bmd-label-floating">Amount </label>
+                                                                    <input type="number" value={amount||""} onChange={e=>setAmount(e.target.value)} className="form-control" />
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Weight</label>
-
-                                                            <input type="number" className="form-control" required />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Rate</label>
-                                                            <input type="number" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-4">
-
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Total Payment</label>
-                                                            <input type="text" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Advance</label>
-                                                            <input type="text" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Remaining</label>
-                                                            <input type="number" className="form-control" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">Order Time</label>
-                                                            <input type="text" className="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <button type="submit" className="btn btn-primary pull-right">Create Order</button>
+                                                    )
+                                                })}
+                                                <button type="submit" className="btn btn-primary pull-right">Submit</button>
+                                                <button type="submit" onClick={()=>setInputRows(inputRows - 1)} className="btn btn-primary pull-right">Delete Row</button>
+                                                <button type="submit" onClick={()=>setInputRows(inputRows + 1)} className="btn btn-primary pull-right">Add Row</button>
                                                 <div className="clearfix" />
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="col-md-4">
-                                    <div className="card card-profile">
-                                        <div className="card-avatar">
-                                            <img className="img" alt="Person" src={Self} />
-                                        </div>
-                                        <div className="card-body">
-                                            <h6 className="card-category text-gray">CEO / Co-Founder</h6>
-                                            <h4 className="card-title">Muhammad Afaque</h4>
-                                            <p className="card-description">
-                                                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                                             </p>
-                                            <button className="btn btn-primary btn-round">Follow</button>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                             <div className="row">
                                 <div className="card">
@@ -180,4 +172,13 @@ function Bills() {
     )
 }
 
-export default Bills
+const mapStateToProps = (state) => {
+    return ({
+        // orders: state.orders
+        accounts: state.accounts,
+        orders: state.orders
+
+    })
+}
+
+export default connect(mapStateToProps, null)(Bills)
