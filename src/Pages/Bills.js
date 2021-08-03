@@ -15,7 +15,8 @@ function Bills(props) {
 
     const [name, setName] = useState()
     const [inputRows, setInputRows] = useState(1)
-    const [itemDesc , setItemDesc] = useState()
+    // const [bill , setBills] = useState([])
+    const [itemDesc , setItemDesc] = useState([])
     const [weight , setWeight] = useState()
     const [rate , setRate] = useState()
     const [amount , setAmount] = useState()
@@ -34,6 +35,18 @@ function Bills(props) {
     }
     )
 
+    const addBill = (e) => {
+        e.preventDefault()
+        // setBills([
+        //     ...bill,
+        //     {
+        //         id : bill.length,
+        //         desc : itemDesc
+        //     }
+        // ])
+        // setItemDesc("")
+    }
+
 
     return (
         <div>
@@ -50,7 +63,7 @@ function Bills(props) {
                                             <h4 className="card-title">Create Bills</h4>
                                         </div>
                                         <div className="card-body">
-                                            <form>
+                                            <form onSubmit={addBill}>
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group ">
@@ -78,7 +91,7 @@ function Bills(props) {
                                                                 <div className="form-group">
                                                                     <label className="bmd-label-floating">Item Desc.</label>
 
-                                                                    <input type="text" value={itemDesc||""} onChange={e=>setItemDesc(e.target.value)} className="form-control" required />
+                                                                    <input type="text" value={itemDesc||""} onChange={e=>setItemDesc([e.target.value])} className="form-control" required />
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-3">
