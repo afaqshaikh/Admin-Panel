@@ -5,6 +5,7 @@ import Navbar from '../Components/Navbar'
 import { connect } from 'react-redux';
 import { useState } from 'react'
 import SelectSearch, { fuzzySearch } from 'react-select-search';
+import { set_bill } from "../Config/store/action";
 
 
 
@@ -12,20 +13,14 @@ import SelectSearch, { fuzzySearch } from 'react-select-search';
 function Bills(props) {
     var date = new Date()
     const accounts = props.accounts
+    // const bills =props.bills
 
     const [name, setName] = useState()
-    const [inputRows, setInputRows] = useState(1)
-    // const [bill , setBills] = useState([])
-    const [itemDesc , setItemDesc] = useState([])
-    const [weight , setWeight] = useState()
-    const [rate , setRate] = useState()
-    const [amount , setAmount] = useState()
-
-    console.log(itemDesc)
-    // const billDetails = {
-    //     account : name,
-    // }
-
+    const [inputFields, setInputFields] = useState([
+        { itemDesc: "", weight: "", rate: "", amount: "" },
+        { itemDesc: "", weight: "", rate: "", amount: "" },
+    ])
+    // const [newBill , setNewBill] = useState()
     // Get accounts from redux
     const options = accounts.map((v, i) => {
         return {
@@ -35,17 +30,41 @@ function Bills(props) {
     }
     )
 
-    const addBill = (e) => {
-        e.preventDefault()
-        // setBills([
-        //     ...bill,
-        //     {
-        //         id : bill.length,
-        //         desc : itemDesc
-        //     }
-        // ])
-        // setItemDesc("")
+    const handleInputChange = (event, index) => {
+        const values = [...inputFields]
+        values[index][event.target.name] = event.target.value
+        setInputFields(values)
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if(!name) return alert("Enter account name")
+        var bill = [name, inputFields]
+        console.log("New Bill ==>",bill)
+        // setNewBill(bill)
+        setName("")
+        setInputFields([
+            { itemDesc: "", weight: "", rate: "", amount: "" },
+            { itemDesc: "", weight: "", rate: "", amount: "" }
+        ])
+        // console.log(newBill)
+    }
+
+    const handleAddField = (e) => {
+        e.preventDefault()
+        setInputFields([
+            ...inputFields,
+            { itemDesc: "", weight: "", rate: "", amount: "" }
+        ])
+    }
+
+    const handleRemoveField = (index) => {
+        const values = [...inputFields]
+        values.splice(index, 1)
+        setInputFields(values)
+    }
+
+    
 
 
     return (
@@ -63,7 +82,7 @@ function Bills(props) {
                                             <h4 className="card-title">Create Bills</h4>
                                         </div>
                                         <div className="card-body">
-                                            <form onSubmit={addBill}>
+                                            <form onSubmit={handleSubmit}>
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group ">
@@ -79,47 +98,66 @@ function Bills(props) {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">{date.toDateString()}</label>
-                                                            {/* <input type="text" className="form-control" /> */}
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {[...Array(inputRows)].map((elementInArray, index) => {
-                                                    return (
-                                                        <div className="row" key={index}>
+                                                {inputFields.map((inputField, index) => {
+                                                    return <div className="row" key={index}>
 
-                                                            <div className="col-md-3">
-                                                                <div className="form-group">
-                                                                    <label className="bmd-label-floating">Item Desc.</label>
+                                                        <div className="col-md-3">
+                                                            <div className="form-group">
+                                                                <label className="bmd-label-floating">Item Desc.</label>
 
-                                                                    <input type="text" value={itemDesc||""} onChange={e=>setItemDesc([e.target.value])} className="form-control" required />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <div className="form-group">
-                                                                    <label className="bmd-label-floating">Weight</label>
-                                                                    <input type="number" value={weight||""} onChange={e=>setWeight(e.target.value)} className="form-control" />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-3">
-
-                                                                <div className="form-group">
-                                                                    <label className="bmd-label-floating">Rate </label>
-                                                                    <input type="number" value={rate||""} onChange={e=>setRate(e.target.value)} className="form-control" />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-3">
-
-                                                                <div className="form-group">
-                                                                    <label className="bmd-label-floating">Amount </label>
-                                                                    <input type="number" value={amount||""} onChange={e=>setAmount(e.target.value)} className="form-control" />
-                                                                </div>
+                                                                <input type="text" name="itemDesc" value={inputField.itemDesc} onChange={(event) => handleInputChange(event, index)} className="form-control" required />
                                                             </div>
                                                         </div>
-                                                    )
+                                                        <div className="col-md-2">
+                                                            <div className="form-group">
+                                                                <label className="bmd-label-floating">Weight</label>
+                                                                <input type="number" name="weight" value={inputField.weight} onChange={(event) => handleInputChange(event, index)} className="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-2">
+
+                                                            <div className="form-group">
+                                                                <label className="bmd-label-floating">Rate </label>
+                                                                <input type="number" name="rate" value={inputField.rate} onChange={(event) => handleInputChange(event, index)} className="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-2">
+
+                                                            <div className="form-group">
+                                                                <label className="bmd-label-floating">Amount </label>
+                                                                <input type="number" name="amount" value={inputField.amount} onChange={(event) => handleInputChange(event, index)} className="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-3">
+                                                            <div className="form-group">
+                                                                <button type="submit" onClick={() => handleRemoveField(index)} className="btn btn-primary pull-right">Delete Row</button>
+
+                                                                <button type="submit" onClick={(e) => handleAddField(e)} className="btn btn-primary pull-right">Add Row</button>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
                                                 })}
-                                                <button type="submit" className="btn btn-primary pull-right">Submit</button>
-                                                <button type="submit" onClick={()=>setInputRows(inputRows - 1)} className="btn btn-primary pull-right">Delete Row</button>
-                                                <button type="submit" onClick={()=>setInputRows(inputRows + 1)} className="btn btn-primary pull-right">Add Row</button>
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <div className="form-group">
+                                                            <label className="label">Total Amount </label>
+                                                            <input type="number" name="totalAmount" className="form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="form-group">
+                                                            <label className="label">Total Weight </label>
+                                                            <input type="number" name="totalAmount" className="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" onClick={handleSubmit} className="btn btn-primary pull-right">Submit</button>
                                                 <div className="clearfix" />
                                             </form>
                                         </div>
@@ -150,15 +188,16 @@ function Bills(props) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {/* {orders.map((v, i) => {
-                                                        return <tr key={i}>
-                                                            <td>{i}</td>
-                                                            <td>{v.name}</td>
-                                                            <td>{v.time}</td>
-                                                            <td>{v.advance}</td>
-                                                            <td style={{ color: "#8e24aa" }}>{props.accounts.contact}</td>
-                                                            <td><button type="button" className="btn btn-primary">View Details</button></td>
-                                                        </tr>
+                                                    {/* {bills.map((v, i) => {
+                                                        console.log(v)
+                                                        // return <tr key={i}>
+                                                        //     <td>{i}</td>
+                                                        //     <td>{v.name}</td>
+                                                        //     <td>{v.time}</td>
+                                                        //     <td>{v.advance}</td>
+                                                        //     <td style={{ color: "#8e24aa" }}>{props.accounts.contact}</td>
+                                                        //     <td><button type="button" className="btn btn-primary">View Details</button></td>
+                                                        // </tr>
                                                     })} */}
                                                     <tr>
                                                         <td>0</td>
@@ -187,11 +226,13 @@ function Bills(props) {
 
 const mapStateToProps = (state) => {
     return ({
-        // orders: state.orders
         accounts: state.accounts,
-        orders: state.orders
-
+        bills : state.bills
     })
 }
+// const mapDispatchToProps = (dispatch) => ({
+//     set_bill: (newBill) => dispatch(set_bill(newBill))
+// });
+
 
 export default connect(mapStateToProps, null)(Bills)

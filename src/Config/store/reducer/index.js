@@ -10,7 +10,8 @@ const INITIAL_STATE = {
         { name: "Ahmer", orderT: "11Days", weight: "15gram", rate: "250", totalP: 1000, advance: 600, remainP: 3500 ,orderDetail: "etc"}
         // {name : accounts.name , time: "15Days",weight: "10gram" , rate : "250", totalP : 3000 , advance : 500 , remainP : orders.totalP - orders.advance},
         // {name : accounts.name , time: "15Days",weight: "10gram" , rate : "250", totalP : 3000 , advance : 500 , remainP : orders.totalP - orders.advance},
-    ]
+    ],
+    bills: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +26,11 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 orders: [...state.orders, action.payload]
+            })
+        case "SETBILL":
+            return({
+                ...state,
+                bills: [...state.bills , action.payload]
             })
         default:
             return state;

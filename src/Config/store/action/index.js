@@ -9,13 +9,20 @@ const set_account = (newAccount) => {
 const set_order = (newOrder) => {
     return (dispatch) => {
         // console.log("Working......")
-        console.log(newOrder)
+        // console.log(newOrder)
         dispatch({type : 'SETORDER',payload : newOrder })
+    }
+}
+const set_bill = (newBill) => {
+    return (dispatch) => {
+        console.log(newBill)
+        dispatch({type : 'SETBILL',payload : newBill })
     }
 }
 
 
 export {
     set_account,
-    set_order
+    set_order,
+    set_bill
 }
